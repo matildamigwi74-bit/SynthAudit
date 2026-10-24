@@ -5,7 +5,6 @@ data/synthetic/
 *.csv
 *.xls
 *.xlsx
-!docs/**/*.csv
 
 # Python
 __pycache__/
