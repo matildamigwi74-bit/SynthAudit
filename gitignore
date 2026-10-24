@@ -1,0 +1,34 @@
+# Data — never commit datasets or generated records
+data/raw/
+data/processed/
+data/synthetic/
+*.csv
+*.xls
+*.xlsx
+!docs/**/*.csv
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+.ipynb_checkpoints/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Docker volumes
+docker/volumes/
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
