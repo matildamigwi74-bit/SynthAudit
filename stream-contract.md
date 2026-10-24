@@ -1,7 +1,9 @@
 # SynAudit stream contract
 
-**Version:** 0.1 (draft)
+**Version:** 0.1
+
 **Owner:** Matilda (data ingestion and infrastructure)
+
 **Status:** proposed — open for comment by the team, to be frozen before consumers are built
 
 This document defines the Kafka topics and the record format that every SynAudit service
