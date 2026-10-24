@@ -149,3 +149,32 @@ demonstration or sped up for experiments.
 | Version | Date | Change |
 |---|---|---|
 | 0.1 | 2026-10-24 | First draft: topics, envelope, consumer groups, replay rules. |
+
+---
+
+## 6. Reference sample semantics
+
+The ingestion layer maintains a uniform reference sample of each real stream
+(reservoir sampling, Vitter 1985 Algorithm R), written to
+`data/reference/<dataset>-<source>-reservoir.json`. Services that compare
+incoming records against real data read this file rather than holding the
+stream themselves.
+
+Consumers must know two things about it:
+
+**It is uniform over all history, not over recent records.** Every record seen
+so far is in the sample with probability k/n. If the real stream drifts, the
+sample is a mixture of the old and new distributions, not a picture of the
+current one.
+
+**So a quality drop measured against it may be drift, not generator failure.**
+Quality comparison and drift detection must be read together: a divergence from
+the reference sample means either the synthetic data degraded or the real data
+moved, and the reference sample alone cannot tell them apart.
+
+Known alternatives, not implemented in this version: a sliding-window reservoir,
+or biased reservoir sampling (Aggarwal 2006), which weights recent records
+exponentially. Deferred so the baseline is a standard, well-understood algorithm.
+
+Each snapshot carries `records_seen` and `inclusion_probability`, so a consumer
+can tell how much history the sample covers.
